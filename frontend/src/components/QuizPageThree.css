@@ -1,0 +1,339 @@
+.font-sassoon {
+    font-family: 'Sassoon Primary Std', sans-serif;
+  }
+
+  .no-scroll {
+    overflow: hidden !important; /* Force no scrollbars */
+  }
+
+  .quiz-page-three {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F5F5; /* Light background from Figma */
+    overflow: hidden; /* Prevent scrollbars on main container */
+  }
+
+  .main-content-area {
+    flex: 1; /* Takes up remaining vertical space */
+    display: flex;
+    width: 100%;
+    padding: 1rem 2rem; /* Add some padding around the content panels */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent internal scroll unless needed */
+  }
+
+  .left-panel {
+    width: 50%;
+    display: flex;
+    align-items: center; /* Vertically center the image */
+    justify-content: center; /* Horizontally center the image */
+    padding-right: 2rem; /* Space between image and quiz */
+    box-sizing: border-box;
+  }
+
+  .bear-image {
+    max-width: 100%; /* Allow image to shrink */
+    max-height: 70vh; /* Limit height */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain;
+  }
+
+  .right-panel {
+    width: 1000%;
+    padding-bottom:0px;
+    margin-top:20px;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    padding-left: 2rem; /* Space between image and quiz */
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    max-height: calc(100vh - 150px); /* Adjust 150px based on header/footer height */
+  }
+
+  .quiz-content {
+    width: 100%;
+    color: #333;
+     /* Ensure space for absolute positioned buttons */
+    position: relative; /* Needed for absolute positioning of buttons */
+    flex-grow: 1; /* Allow it to grow if needed */
+    display: flex; /* Use flex to position Next button */
+    flex-direction: column; /* Stack content */
+  }
+
+  .quiz-instruction {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: #2c3e50; /* Darker text color */
+  }
+
+  .quiz-instruction .question-number {
+    font-weight: bold;
+  }
+
+  .quiz-instruction u {
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 2px; /* Make underline bolder */
+  }
+
+  .instruction-detail {
+    font-weight: normal;
+    font-size: 0.95rem;
+    color: #555;
+  }
+
+  .quiz-example {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    background-color: #e8f4f8; /* Light blue background for example */
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #bde0fe;
+  }
+
+  .example-label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .example-noun {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #2ecc71; /* Green color for example */
+    background-color: #dff9e8; /* Lighter green highlight */
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+  }
+
+  .sentence-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+
+  }
+
+  .sentence-item {
+    display: flex;
+    align-items: baseline; /* Or 'flex-start' if baseline looks odd with button */
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    gap: 0.75rem; /* Adjust gap as needed */
+    width: max-content; /* <<< ADDED THIS LINE */
+    max-width: 100%; /* Add max-width to prevent overflow on very long sentences if needed */
+  }
+
+
+  .sentence-id {
+    /* margin-right: 0.55rem; */ /* Removed because using gap */
+    font-weight: 700;
+    color: #555;
+    padding-top: 0.0em;
+  }
+
+  .sentence-text {
+     /* flex: 1; */ /* Removed flex: 1 */
+     white-space: normal; /* Allow text wrapping */
+  }
+
+  /* REMOVED .sentence-interactive-area rules */
+
+  .sentence-button-area {
+    flex-shrink: 0; /* Prevent button area from shrinking */
+    white-space: nowrap;
+    /* Alignment handled by parent */
+  }
+
+  .word {
+    cursor: pointer;
+    margin: 0 0.15em; /* Small space between words */
+    padding: 0.1em 0.2em;
+    border-radius: 3px;
+    position: relative; /* For potential pseudo-elements */
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .word:hover {
+    background-color: #e0f7fa; /* Light cyan hover */
+  }
+
+  .word.selected {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    font-weight: 600; /* Make selected words bolder */
+  }
+
+  .word.correct.selected {
+    color: #27ae60; /* Green for correct */
+    background-color: #d4efdf;
+    text-decoration-color: #27ae60;
+  }
+
+  .word.incorrect.selected {
+    color: #e74c3c; /* Red for incorrect */
+    background-color: #f9ebea;
+    text-decoration-color: #e74c3c;
+  }
+
+  /* Add X mark for incorrect selections using ::after */
+  .word.incorrect.selected::after {
+    content: '✗';
+    position: absolute;
+    top: -1.2em; /* Position above the word */
+    left: 50%;
+    transform: translateX(-50%);
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 0.8em;
+  }
+
+  /* Style for words that should have been selected but weren't (optional) */
+  .word.missed {
+     /* Example: faint gray outline */
+     /* border: 1px dashed #bdc3c7; */
+  }
+
+  /* Add style for disabled words */
+  .word.disabled {
+    cursor: default;
+    pointer-events: none; /* Prevent clicks */
+  }
+  .word.disabled:hover {
+      background-color: transparent; /* No hover effect when disabled */
+  }
+
+
+  /* --- Tooltip Styles --- */
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 0.5rem;
+    vertical-align: middle; /* Align trigger nicely */
+  }
+
+  .tooltip-trigger {
+    cursor: help; /* Indicate interactivity */
+    font-size: 1.2rem; /* Adjust size */
+    color: #f39c12; /* Yellow/Orange color */
+  }
+
+  .tooltip-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    bottom: 130%; /* Position above the trigger */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fef3cd; /* Light yellow background */
+    color: #664d03; /* Darker yellow text */
+    border: 1px solid #fce08b; /* Yellow border */
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: max-content; /* Adjust width based on content */
+    max-width: 220px; /* Max width */
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 20; /* Ensure it's above other elements */
+    text-align: center;
+  }
+
+  .tooltip-container:hover .tooltip-content {
+    display: block; /* Show on hover */
+  }
+
+  .tooltip-highlight {
+    font-weight: bold;
+    color: #0a58ca; /* Blue color like in Figma */
+  }
+
+  /* Tooltip Arrow */
+  .tooltip-arrow {
+    position: absolute;
+    bottom: -6px; /* Position below the tooltip box */
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background-color: #fef3cd; /* Match tooltip background */
+    border-bottom: 1px solid #fce08b; /* Match border */
+    border-right: 1px solid #fce08b; /* Match border */
+  }
+
+
+   /* --- Per-Sentence Button Styles --- */
+   .button-check-sentence,
+   .button-try-again-sentence {
+       padding: 0.26rem 0.8rem; /* Smaller padding */
+       font-size: 0.60rem; /* Smaller font */
+       font-weight: 700px;
+       border-radius: 6px;
+       cursor: pointer;
+       border: 1px solid; /* Base border */
+       transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+       min-width: 100px; /* Set a min-width */
+       margin: 0; /* Remove default margins */
+       display: inline-block;
+   }
+   .button-check-sentence {
+       background-color: #006400; /* Light blue background */
+       color: #ffffff; /* Darker blue text */
+       border-color: #a5d8e6; /* Blue border */
+   }
+   .button-check-sentence:hover {
+       background-color: #008200;
+       border-color: #8ecbe0;
+   }
+
+   .button-try-again-sentence {
+       background-color: #f8d7da; /* Light red background */
+       color: #842029; /* Dark red text */
+       border-color: #f5c2c7; /* Reddish border */
+   }
+   .button-try-again-sentence:hover {
+        background-color: #f1c0c5;
+        border-color: #eaaeba;
+   }
+
+   /* --- Optional Correct Feedback Style --- */
+   .feedback-correct {
+       font-size: 0.85rem; /* Adjusted size */
+       font-weight: 600;
+       color: #27ae60;
+       padding: 0.25rem 0.5rem; /* Adjust padding */
+       display: inline-block; /* Make inline */
+       min-width: 100px; /* Match button min-width */
+       text-align: center;
+       /* vertical-align: baseline; */ /* Alignment handled by parent flex */
+   }
+
+
+  /* --- Next Button Container --- */
+  .next-button-container {
+    margin-top: auto; /* Push to the bottom of the flex column */
+    padding-top: 0rem; /* Space above */
+    align-self: flex-end; /* Align container itself to the right */
+  }
+
+  /* --- Base Button Styles (for Next Button) --- */
+  .button {
+    padding: 0.00rem 1.3rem;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    min-width: 100px; /* Minimum width for buttons */
+  }
+
+ 
+
+  /* REMOVE if .button-secondary or .button-check are not used globally */
+  /* .button-secondary { ... } */
+  /* .button-check { ... } */
+
+
+  /* --- Footer Decoration --- */
+ 
